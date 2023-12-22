@@ -14,6 +14,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "auto_size_text",
+      "rootUri": "file:///home/manu/.pub-cache/hosted/pub.dev/auto_size_text-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///home/manu/.pub-cache/hosted/pub.dev/boolean_selector-2.1.1",
       "packageUri": "lib/",
@@ -302,7 +308,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-12-19T01:29:35.160459Z",
+  "generated": "2023-12-20T01:32:46.971907Z",
   "generator": "pub",
   "generatorVersion": "3.1.5"
 }

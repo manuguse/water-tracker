@@ -1,10 +1,16 @@
 import 'package:agua_diaria/functions/drink_helper.dart';
+import 'package:agua_diaria/models/goal_amount.dart';
 import 'package:agua_diaria/values/enums.dart';
+import 'package:agua_diaria/views/goal.dart';
 import 'package:agua_diaria/widgets/value_selector.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RecommendedAmount extends StatefulWidget {
-  const RecommendedAmount({super.key});
+  final bool first;
+
+  const RecommendedAmount({super.key, this.first = false});
 
   @override
   State<RecommendedAmount> createState() => _RecommendedAmountState();
@@ -13,7 +19,7 @@ class RecommendedAmount extends StatefulWidget {
 class _RecommendedAmountState extends State<RecommendedAmount> {
   var _biologicSex = BiologicSex.female;
   var _hour = Hour.halfHour;
-
+  double? calculatedWater;
   final kgController = TextEditingController();
 
   @override
@@ -126,26 +132,60 @@ class _RecommendedAmountState extends State<RecommendedAmount> {
                     "calcular",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  onPressed: () {}),
-              Column(
-                children: [
-                  Text(
-                    'é recomendado que você tome\n${(calculateWater(weight: 100, exercisesInMinutes: 3 * 60, biologicSex: _biologicSex)).toStringAsFixed(1)} litros de água diariamente :)',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  const Text(
-                    'definir como meta',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF3688D3),
-                        fontSize: 12),
-                  )
-                ],
-              )
+                  onPressed: () async {
+                    final kg = int.tryParse(kgController.text);
+                    if (kg != null) {
+                      setState(() {
+                        calculatedWater = calculateWater(
+                            weight: kg,
+                            exercisesInMinutes: _hour,
+                            biologicSex: _biologicSex);
+                      });
+                    }
+                  }),
+              if (calculatedWater != null)
+                Column(
+                  children: [
+                    Text(
+                      'é recomendado que você tome\n${calculatedWater!.toStringAsFixed(1)} litros de água diariamente :)',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        final goalAmount = (calculatedWater! * 1000).toInt();
+                        final prefs = await SharedPreferences.getInstance();
+                        await prefs.setInt('goalAmount', goalAmount);
+                        if (widget.first) {
+                          if (context.mounted) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ChangeNotifierProvider.value(
+                                            value:
+                                                GoalAmount(amount: goalAmount),
+                                            child: const GoalScreen())));
+                          }
+                        } else {
+                          if (mounted) {
+                            Navigator.of(context).pop<int>(goalAmount);
+                          }
+                        }
+                      },
+                      child: const Text(
+                        'definir como meta',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF3688D3),
+                            fontSize: 12),
+                      ),
+                    )
+                  ],
+                )
             ],
           ),
         ),

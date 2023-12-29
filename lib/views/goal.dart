@@ -1,10 +1,12 @@
 import 'package:agua_diaria/functions/database.dart';
 import 'package:agua_diaria/models/drink_item.dart';
+import 'package:agua_diaria/models/goal_amount.dart';
 import 'package:agua_diaria/values/dicts.dart';
 import 'package:agua_diaria/values/enums.dart';
 import 'package:agua_diaria/views/recommended_amount.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import 'add_drink.dart';
 
@@ -26,6 +28,7 @@ class _GoalScreenState extends State<GoalScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final goalAmount = context.watch<GoalAmount>();
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -47,9 +50,20 @@ class _GoalScreenState extends State<GoalScreen> {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
                           final amount = snapshot.data;
-                          return Text(
-                            '$amount/3900',
-                            style: const TextStyle(fontSize: 40),
+                          return Column(
+                            children: [
+                              Text(
+                                '${(amount! / goalAmount.amount * 100).toStringAsFixed(0)}%',
+                                style: const TextStyle(fontSize: 72),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                '$amount/${goalAmount.amount} ml',
+                                style: const TextStyle(fontSize: 24),
+                              ),
+                            ],
                           );
                         } else {
                           return const Center(
@@ -111,10 +125,13 @@ class _GoalScreenState extends State<GoalScreen> {
                       padding: const EdgeInsets.only(bottom: 30),
                       child: GestureDetector(
                           onTap: () async {
-                            await Navigator.of(context).push<bool>(
-                                MaterialPageRoute(
+                            final goalAmountValue = await Navigator.of(context)
+                                .push<int>(MaterialPageRoute(
                                     builder: (context) =>
                                         const RecommendedAmount()));
+                            if (goalAmountValue != null) {
+                              goalAmount.amount = goalAmountValue;
+                            }
                           },
                           child: const Text(
                             'descubra a quantidade\nrecomendada para você',

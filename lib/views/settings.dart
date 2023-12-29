@@ -69,7 +69,7 @@ class _SettingsState extends State<Settings> {
                     ),
                     const Text('lembretes'),
                   ]),
-                  SizedBox(height: 36),
+                  const SizedBox(height: 36),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -101,6 +101,7 @@ class _SettingsState extends State<Settings> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [Text('meta diária'), Text('3010 ml')],
+                    // TODO botar o text como variável
                   ),
                 ],
               ),

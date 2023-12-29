@@ -18,7 +18,8 @@ Future<Database> getDatabase() async {
 Future<int> getDrinkAmountHistory() async {
   final database = await getDatabase();
   final now = DateTime.now();
-  final snapshot = await database.rawQuery("""select coalesce(sum(amount), 0) amount 
+  final snapshot =
+      await database.rawQuery("""select coalesce(sum(amount), 0) amount 
       from drink_history where
       strftime('%Y-%m-%d', date / 1000, 'unixepoch') = strftime('%Y-%m-%d', ${now.millisecondsSinceEpoch} / 1000, 'unixepoch') ;""");
   return snapshot.first['amount'] as int;

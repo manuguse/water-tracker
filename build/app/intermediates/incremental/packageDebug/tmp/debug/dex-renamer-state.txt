@@ -1,4 +1,4 @@
-#Thu Dec 28 22:14:39 BRT 2023
+#Fri Dec 29 14:11:47 BRT 2023
 base.0=/home/manu/StudioProjects/agua_diaria/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

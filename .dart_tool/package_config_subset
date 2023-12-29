@@ -66,6 +66,10 @@ meta
 2.12
 file:///home/manu/.pub-cache/hosted/pub.dev/meta-1.9.1/
 file:///home/manu/.pub-cache/hosted/pub.dev/meta-1.9.1/lib/
+nested
+2.12
+file:///home/manu/.pub-cache/hosted/pub.dev/nested-1.0.0/
+file:///home/manu/.pub-cache/hosted/pub.dev/nested-1.0.0/lib/
 path
 2.12
 file:///home/manu/.pub-cache/hosted/pub.dev/path-1.8.3/
@@ -98,6 +102,10 @@ plugin_platform_interface
 3.0
 file:///home/manu/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.7/
 file:///home/manu/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.7/lib/
+provider
+2.12
+file:///home/manu/.pub-cache/hosted/pub.dev/provider-6.1.1/
+file:///home/manu/.pub-cache/hosted/pub.dev/provider-6.1.1/lib/
 shared_preferences
 2.19
 file:///home/manu/.pub-cache/hosted/pub.dev/shared_preferences-2.2.2/

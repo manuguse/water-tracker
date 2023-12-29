@@ -12,10 +12,4 @@ enum Hour {
   fourPlusHour;
 }
 
-enum Drink {
-  water,
-  coffee,
-  tea,
-  soda,
-  juice
-}
+enum Drink { water, coffee, tea, soda, juice }

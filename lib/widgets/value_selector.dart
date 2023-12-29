@@ -8,12 +8,12 @@ class ValueSelector<T> extends StatefulWidget {
 
   const ValueSelector(
       {super.key,
-        required this.value,
-        required this.valueMap,
-        required this.onSelect,
-        this.paddingHorizontal = 0})
+      required this.value,
+      required this.valueMap,
+      required this.onSelect,
+      this.paddingHorizontal = 0})
       : assert(
-  valueMap.length >= 2, 'The valueMap\'s size must be at least 2.');
+            valueMap.length >= 2, 'The valueMap\'s size must be at least 2.');
 
   @override
   State<ValueSelector<T>> createState() => _ValueSelectorState<T>();
@@ -90,7 +90,7 @@ class _ValueSelectorState<T> extends State<ValueSelector<T>> {
               width: widget.paddingHorizontal,
             ),
             Row(
-              // mainAxisSize: MainAxisSize.min,
+                // mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: widget.valueMap.entries.map((e) {
                   final key = GlobalKey();
@@ -113,7 +113,7 @@ class _ValueSelectorState<T> extends State<ValueSelector<T>> {
                                 ? const Color(0xFF3688D3)
                                 : const Color(0xFF97C5EF),
                             borderRadius:
-                            const BorderRadius.all(Radius.circular(30))),
+                                const BorderRadius.all(Radius.circular(30))),
                         child: Center(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(

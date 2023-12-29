@@ -7,3 +7,12 @@ Map<Drink, String> get drinkDict => {
       Drink.soda: 'Refrigerante',
       Drink.juice: 'Suco',
     };
+
+Map<Hour, int> get hourDict => {
+      Hour.zeroHour: 0,
+      Hour.halfHour: 30,
+      Hour.oneHour: 60,
+      Hour.twoHour: 120,
+      Hour.threeHour: 180,
+      Hour.fourPlusHour: 240
+    };

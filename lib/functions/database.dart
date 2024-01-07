@@ -1,3 +1,4 @@
+import 'package:agua_diaria/models/drink_history.dart';
 import 'package:agua_diaria/values/database.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -23,4 +24,20 @@ Future<int> getDrinkAmountHistory() async {
       from drink_history where
       strftime('%Y-%m-%d', date / 1000, 'unixepoch') = strftime('%Y-%m-%d', ${now.millisecondsSinceEpoch} / 1000, 'unixepoch') ;""");
   return snapshot.first['amount'] as int;
+}
+
+Future<Map<DateTime, List<DrinkHistory>>> getDate() async {
+  final database = await getDatabase();
+  final snapshot = await database
+      .rawQuery("""select date, amount, type from drink_history;""");
+  final Map<DateTime, List<DrinkHistory>> items = {};
+  for (final item in snapshot) {
+    final drinkHistoryItem = DrinkHistory.fromJson();
+    //Testar se vai funcionar.
+    final dayTime = DateTime();
+    final listToAdd = items[dayTime] ?? [];
+    listToAdd.add(drinkHistoryItem);
+    items[dayTime] = listToAdd;
+  }
+  return items;
 }

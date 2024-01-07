@@ -11,7 +11,7 @@ void main() {
         scaffoldBackgroundColor: const Color(0xFFDCE5F1),
         textTheme: const TextTheme(
             bodyMedium: TextStyle(color: Color(0xFF020A0F), fontSize: 16))),
-    home: const LoadScreen(),
+    home: const HistoryScreen(),
   ));
 }
 

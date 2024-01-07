@@ -22,22 +22,25 @@ Future<int> getDrinkAmountHistory() async {
   final snapshot =
       await database.rawQuery("""select coalesce(sum(amount), 0) amount 
       from drink_history where
-      strftime('%Y-%m-%d', date / 1000, 'unixepoch') = strftime('%Y-%m-%d', ${now.millisecondsSinceEpoch} / 1000, 'unixepoch') ;""");
+      strftime('%Y-%m-%d', date / 1000, 'unixepoch') = strftime('%Y-%m-%d', ${now.millisecondsSinceEpoch} / 1000, 'unixepoch');""");
   return snapshot.first['amount'] as int;
 }
 
-Future<Map<DateTime, List<DrinkHistory>>> getDate() async {
+Future<Map<int, Map<DateTime, List<DrinkHistory>>>> getDrinkHistory() async {
   final database = await getDatabase();
-  final snapshot = await database
-      .rawQuery("""select date, amount, type from drink_history;""");
-  final Map<DateTime, List<DrinkHistory>> items = {};
+  final snapshot = await database.rawQuery(
+      """select date, amount, type from drink_history order by date desc;""");
+  final Map<int, Map<DateTime, List<DrinkHistory>>> items = {};
   for (final item in snapshot) {
-    final drinkHistoryItem = DrinkHistory.fromJson();
+    final drinkHistoryItem = DrinkHistory.fromJson(item);
     //Testar se vai funcionar.
-    final dayTime = DateTime();
-    final listToAdd = items[dayTime] ?? [];
+    final dayTime = DateTime(drinkHistoryItem.date.year,
+        drinkHistoryItem.date.month, drinkHistoryItem.date.day);
+    final mapFromYear = items[dayTime.year] ?? {};
+    final listToAdd = mapFromYear[dayTime] ?? [];
     listToAdd.add(drinkHistoryItem);
-    items[dayTime] = listToAdd;
+    mapFromYear[dayTime] = listToAdd;
+    items[dayTime.year] = mapFromYear;
   }
   return items;
 }

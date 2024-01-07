@@ -1,6 +1,6 @@
 import 'package:agua_diaria/values/enums.dart';
 
-Map<Drink, String> get drinkDict => {
+const Map<Drink, String> drinkDict = {
       Drink.water: 'Água',
       Drink.coffee: 'Café',
       Drink.tea: 'Chá',
@@ -8,7 +8,7 @@ Map<Drink, String> get drinkDict => {
       Drink.juice: 'Suco',
     };
 
-Map<Hour, int> get hourDict => {
+const Map<Hour, int> hourDict = {
       Hour.zeroHour: 0,
       Hour.halfHour: 30,
       Hour.oneHour: 60,

@@ -2,15 +2,20 @@ import 'package:agua_diaria/functions/database.dart';
 import 'package:agua_diaria/values/enums.dart';
 
 class DrinkHistory {
-  final DateTime day;
+  final DateTime date;
   final int drinkAmount;
   final Drink drink;
 
   DrinkHistory(
-      {required this.day, required this.drinkAmount, required this.drink});
+      {required this.date, required this.drinkAmount, required this.drink});
+
+  DrinkHistory.fromJson(Map<String, dynamic> json)
+      : date = DateTime.fromMillisecondsSinceEpoch(json['date']),
+        drinkAmount = json['amount'],
+        drink = Drink.values[json['type']];
 
   Map<String, dynamic> get databaseJson => {
-        'date': day.millisecondsSinceEpoch,
+        'date': date.millisecondsSinceEpoch,
         'amount': drinkAmount,
         'type': Drink.values.indexOf(drink),
       };

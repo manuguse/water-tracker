@@ -116,7 +116,7 @@ class AddDrinkDialog extends StatelessWidget {
                           final amount = int.tryParse(drinkController.text);
                           if (amount != null) {
                             final drinkHistory = DrinkHistory(
-                                day: DateTime.now(),
+                                date: DateTime.now(),
                                 drinkAmount: amount,
                                 drink: drinkItem.type);
                             await drinkHistory.saveOnDatabase();

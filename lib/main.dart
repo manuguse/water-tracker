@@ -1,9 +1,10 @@
 import 'package:agua_diaria/models/goal_amount.dart';
-import 'package:agua_diaria/views/goal.dart';
 import 'package:agua_diaria/views/recommended_amount.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'views/tab.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -11,7 +12,7 @@ void main() {
         scaffoldBackgroundColor: const Color(0xFFDCE5F1),
         textTheme: const TextTheme(
             bodyMedium: TextStyle(color: Color(0xFF020A0F), fontSize: 16))),
-    home: const HistoryScreen(),
+    home: const LoadScreen(),
   ));
 }
 
@@ -42,9 +43,9 @@ class _LoadScreenState extends State<LoadScreen> {
               context,
               MaterialPageRoute(
                   builder: (BuildContext context) =>
-                      ChangeNotifierProvider.value(
-                          value: GoalAmount(amount: goalAmount),
-                          child: const GoalScreen())));
+                      ChangeNotifierProvider<GoalAmount>(
+                          create: (_) => GoalAmount(amount: goalAmount),
+                          child: const TabScreen())));
         }
       }
     });

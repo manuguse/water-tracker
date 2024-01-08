@@ -22,13 +22,20 @@ class _TabScreenState extends State<TabScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          flexibleSpace: SafeArea(
-            child: TabBar(controller: tabController, tabs: const [
-              Tab(text: "diário"),
-              Tab(text: "histórico"),
-              Tab(text: "configurações"),
-            ]),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(40), // here the desired height
+          child: AppBar(
+            flexibleSpace: SafeArea(
+              child: TabBar(
+                  physics: const BouncingScrollPhysics(),
+                  controller: tabController,
+                  indicatorColor: Colors.white,
+                  tabs: const [
+                    Tab(text: "diário"),
+                    Tab(text: "histórico"),
+                    Tab(text: "configurações"),
+                  ]),
+            ),
           ),
         ),
         body: getTabBarPages());
@@ -36,6 +43,7 @@ class _TabScreenState extends State<TabScreen> with TickerProviderStateMixin {
 
   Widget getTabBarPages() {
     return TabBarView(
+        physics: const BouncingScrollPhysics(),
         controller: tabController,
         children: const <Widget>[GoalScreen(), HistoryScreen(), Settings()]);
   }

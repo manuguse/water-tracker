@@ -1,4 +1,6 @@
 import 'package:agua_diaria/models/goal_amount.dart';
+import 'package:agua_diaria/views/daily_history.dart';
+import 'package:agua_diaria/views/history.dart';
 import 'package:agua_diaria/views/recommended_amount.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +12,7 @@ void main() {
   runApp(MaterialApp(
     theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFDCE5F1),
+        appBarTheme: const AppBarTheme(color: Color(0xFF3688D3)),
         textTheme: const TextTheme(
             bodyMedium: TextStyle(color: Color(0xFF020A0F), fontSize: 16))),
     home: const LoadScreen(),

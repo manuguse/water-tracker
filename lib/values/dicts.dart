@@ -4,7 +4,7 @@ const Map<Drink, String> drinkDict = {
       Drink.water: 'Água',
       Drink.coffee: 'Café',
       Drink.tea: 'Chá',
-      Drink.soda: 'Refrigerante',
+      Drink.soda: 'Refri',
       Drink.juice: 'Suco',
     };
 

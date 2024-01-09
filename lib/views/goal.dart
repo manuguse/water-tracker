@@ -27,7 +27,7 @@ class _GoalScreenState extends State<GoalScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contextcontext) {
     final goalAmount = context.watch<GoalAmount>();
     return Scaffold(
       body: SafeArea(

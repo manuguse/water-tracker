@@ -1,4 +1,6 @@
+import 'package:agua_diaria/models/goal_amount.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -17,6 +19,7 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
+    final goalAmount = context.watch<GoalAmount>();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -81,7 +84,7 @@ class _SettingsState extends State<Settings> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text('meta diária'), Text('3010 ml')],
+                children: [Text('meta diária'), Text('${goalAmount.amount} ml')],
                 // TODO botar o text como variável
               ),
             ],

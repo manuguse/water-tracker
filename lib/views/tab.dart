@@ -27,6 +27,7 @@ class _TabScreenState extends State<TabScreen> with TickerProviderStateMixin {
           child: AppBar(
             flexibleSpace: SafeArea(
               child: TabBar(
+                  onTap: (_) => FocusManager.instance.primaryFocus?.unfocus(),
                   physics: const BouncingScrollPhysics(),
                   controller: tabController,
                   indicatorColor: Colors.white,
@@ -45,6 +46,10 @@ class _TabScreenState extends State<TabScreen> with TickerProviderStateMixin {
     return TabBarView(
         physics: const BouncingScrollPhysics(),
         controller: tabController,
-        children: const <Widget>[GoalScreen(), HistoryScreen(), Settings()]);
+        children: const <Widget>[
+          GoalScreen(),
+          HistoryScreen(),
+          LoadSettings()
+        ]);
   }
 }

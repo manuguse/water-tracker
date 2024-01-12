@@ -68,20 +68,20 @@ class AddDrinkDialog extends StatelessWidget {
                       width: 150,
                       child: TextField(
                         controller: drinkController,
-                        keyboardType: TextInputType.numberWithOptions(
+                        keyboardType: const TextInputType.numberWithOptions(
                             signed: false, decimal: false),
                         textAlign: TextAlign.center,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           suffixIcon: Padding(
                             padding: EdgeInsets.all(20),
                             child: Text('ml'),
                           ),
-                          focusedBorder: const OutlineInputBorder(
+                          focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Color(0xFF3688D3), width: 2.0),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30))),
-                          enabledBorder: const OutlineInputBorder(
+                          enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Color(0xFF3688D3), width: 2.0),
                               borderRadius:

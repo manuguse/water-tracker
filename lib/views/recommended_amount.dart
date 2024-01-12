@@ -151,7 +151,8 @@ class _RecommendedAmountState extends State<RecommendedAmount> {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       onPressed: () async {
-                        final kg = double.tryParse(kgController.text.replaceAll(',', '.'));
+                        final kg = double.tryParse(
+                            kgController.text.replaceAll(',', '.'));
                         if (kg != null) {
                           setState(() {
                             calculatedWater = calculateWater(
@@ -175,7 +176,7 @@ class _RecommendedAmountState extends State<RecommendedAmount> {
                         GestureDetector(
                           onTap: () async {
                             final goalAmount =
-                                ((calculatedWater!*10).toInt() * 100);
+                                ((calculatedWater! * 10).toInt() * 100);
                             final prefs = await SharedPreferences.getInstance();
                             await prefs.setInt('goalAmount', goalAmount);
                             if (widget.first) {
@@ -207,7 +208,7 @@ class _RecommendedAmountState extends State<RecommendedAmount> {
                     )
                 ],
               ),
-              const BackButton(),
+              if (!widget.first) const BackButton(),
             ],
           ),
         ),

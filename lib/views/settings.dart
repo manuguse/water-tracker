@@ -10,7 +10,8 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  bool light = true;
+  bool darkMode = true;
+  bool reminders = true;
 
   @override
   void initState() {
@@ -29,11 +30,11 @@ class _SettingsState extends State<Settings> {
             children: [
               Row(children: [
                 Switch(
-                  value: light,
+                  value: darkMode,
                   activeColor: Colors.blue,
                   onChanged: (bool value) {
                     setState(() {
-                      light = value;
+                      darkMode = value;
                     });
                   },
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -42,11 +43,11 @@ class _SettingsState extends State<Settings> {
               ]),
               Row(children: [
                 Switch(
-                  value: light,
+                  value: reminders,
                   activeColor: Colors.blue,
                   onChanged: (bool value) {
                     setState(() {
-                      light = value;
+                      reminders = value;
                     });
                   },
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -54,15 +55,23 @@ class _SettingsState extends State<Settings> {
                 const Text('lembretes'),
               ]),
               const SizedBox(height: 36),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Row(
                     children: [
                       Column(
                         children: [
-                          Text('hora de acordar'),
-                          Text('09:15'),
+                          const Text('hora de acordar'),
+                          const SizedBox(height: 4,),
+                          Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 16),
+                                child: Center(child: Text('09:15')),
+                              ))
                         ],
                       )
                     ],
@@ -71,8 +80,16 @@ class _SettingsState extends State<Settings> {
                     children: [
                       Column(
                         children: [
-                          Text('hora de dormir'),
-                          Text('23:45'),
+                          const Text('hora de dormir'),
+                          const SizedBox(height: 4,),
+                          Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 16),
+                                child: Center(child: Text('23:45')),
+                              ))
                         ],
                       )
                     ],
@@ -83,8 +100,20 @@ class _SettingsState extends State<Settings> {
                 height: 24,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text('meta diária'), Text('${goalAmount.amount} ml')],
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Text('meta diária'),
+                  const SizedBox(width: 12,),
+                  Expanded(
+                    child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(child: Text('${goalAmount.amount} ml')),
+                        )),
+                  )
+                ],
                 // TODO botar o text como variável
               ),
             ],

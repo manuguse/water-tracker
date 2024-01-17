@@ -1,10 +1,10 @@
 import 'package:agua_diaria/functions/drink_helper.dart';
 import 'package:agua_diaria/models/goal_amount.dart';
 import 'package:agua_diaria/values/enums.dart';
-import 'package:agua_diaria/views/goal.dart';
+import 'package:agua_diaria/values/input_formatters.dart';
+import 'package:agua_diaria/views/tabs/goal/goal.dart';
 import 'package:agua_diaria/widgets/value_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -71,17 +71,8 @@ class _RecommendedAmountState extends State<RecommendedAmount> {
                           height: 48,
                           child: TextField(
                             inputFormatters: [
-                              MyFormatter.allow(RegExp(r'[0-9.,]')),
-                              TextInputFormatter.withFunction(
-                                  (oldValue, newValue) {
-                                final text = newValue.text;
-                                return text.isEmpty
-                                    ? newValue
-                                    : !RegExp(r"^[0-9]{1,3}([.,][0-9]?)?$")
-                                            .hasMatch(text)
-                                        ? oldValue
-                                        : newValue;
-                              }),
+                              onlyDecimalDigits,
+                              decimalFormatter,
                             ],
                             controller: kgController,
                             keyboardType: const TextInputType.numberWithOptions(
@@ -154,6 +145,7 @@ class _RecommendedAmountState extends State<RecommendedAmount> {
                         final kg = double.tryParse(
                             kgController.text.replaceAll(',', '.'));
                         if (kg != null) {
+                          FocusScope.of(context).requestFocus(FocusNode());
                           setState(() {
                             calculatedWater = calculateWater(
                                 weight: kg,
@@ -214,19 +206,5 @@ class _RecommendedAmountState extends State<RecommendedAmount> {
         ),
       ),
     );
-  }
-}
-
-class MyFormatter extends FilteringTextInputFormatter {
-  MyFormatter.allow(Pattern filterPattern) : super.allow(filterPattern);
-
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    final updatedValue = super.formatEditUpdate(oldValue, newValue);
-
-    return updatedValue.text.isEmpty && newValue.text.isNotEmpty
-        ? oldValue
-        : updatedValue;
   }
 }

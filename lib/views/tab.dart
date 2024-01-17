@@ -1,6 +1,6 @@
-import 'package:agua_diaria/views/goal.dart';
-import 'package:agua_diaria/views/history.dart';
-import 'package:agua_diaria/views/settings.dart';
+import 'package:agua_diaria/views/tabs/goal/goal.dart';
+import 'package:agua_diaria/views/tabs/history/history.dart';
+import 'package:agua_diaria/views/tabs/settings/settings.dart';
 import 'package:flutter/material.dart';
 
 class TabScreen extends StatefulWidget {

@@ -1,7 +1,5 @@
 import 'package:agua_diaria/models/goal_amount.dart';
-import 'package:agua_diaria/views/daily_history.dart';
-import 'package:agua_diaria/views/history.dart';
-import 'package:agua_diaria/views/recommended_amount.dart';
+import 'package:agua_diaria/views/tabs/goal/recommended_amount.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';

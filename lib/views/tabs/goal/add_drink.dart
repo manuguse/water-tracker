@@ -2,6 +2,7 @@ import 'package:agua_diaria/models/drink_history.dart';
 import 'package:agua_diaria/models/drink_item.dart';
 import 'package:agua_diaria/values/dicts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AddDrinkDialog extends StatelessWidget {
@@ -25,9 +26,12 @@ class AddDrinkDialog extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    SvgPicture.asset(
-                      drinkItem.path,
+                    SizedBox(
                       height: 80,
+                      width: 80,
+                      child: SvgPicture.asset(
+                        drinkItem.path,
+                      ),
                     ),
                     const SizedBox(
                       width: 20,
@@ -67,6 +71,9 @@ class AddDrinkDialog extends StatelessWidget {
                     SizedBox(
                       width: 150,
                       child: TextField(
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         controller: drinkController,
                         keyboardType: const TextInputType.numberWithOptions(
                             signed: false, decimal: false),
@@ -120,9 +127,9 @@ class AddDrinkDialog extends StatelessWidget {
                                 drinkAmount: amount,
                                 drink: drinkItem.type);
                             await drinkHistory.saveOnDatabase();
-                          }
-                          if (context.mounted) {
-                            Navigator.of(context).pop(true);
+                            if (context.mounted) {
+                              Navigator.of(context).pop(true);
+                            }
                           }
                         }),
                   ],

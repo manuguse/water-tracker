@@ -3,7 +3,7 @@ import 'package:agua_diaria/models/drink_item.dart';
 import 'package:agua_diaria/models/goal_amount.dart';
 import 'package:agua_diaria/values/dicts.dart';
 import 'package:agua_diaria/values/enums.dart';
-import 'package:agua_diaria/views/recommended_amount.dart';
+import 'package:agua_diaria/views/tabs/goal/recommended_amount.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';

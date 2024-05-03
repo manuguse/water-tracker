@@ -18,7 +18,7 @@ class _LoadSettingsState extends State<LoadSettings> {
   Future<SettingsItemsToEdit> getSettingsItemsToEdit() async {
     final settingsItems = await getSettingsItems();
     final settingsItemsToEdit =
-    SettingsItemsToEdit.fromSettingsItems(settingsItems);
+        SettingsItemsToEdit.fromSettingsItems(settingsItems);
     return settingsItemsToEdit;
   }
 
@@ -82,22 +82,41 @@ class _SettingsState extends State<Settings> {
                 Switch(
                   value: false,
                   onChanged: (bool value) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
+                    ScaffoldMessenger.of(context).showMaterialBanner(
+                      MaterialBanner(
+                        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+                        content: Text('em breve disponível', style: TextStyle(color: Colors.white)),
+                        // leading: Icon(Icons.agriculture_outlined),
                         backgroundColor: Colors.blue,
-                        content: Text('em breve modo noturno :)'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => ScaffoldMessenger.of(context)
+                                .hideCurrentMaterialBanner(),
+                            child: Text('FECHAR', style: TextStyle(color: Colors.white),),
+                          ),
+                        ],
                       ),
                     );
                   },
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //   SnackBar(
+                  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  //     behavior: SnackBarBehavior.floating,
+                  //     padding: const EdgeInsets.all(16),
+                  //     duration: const Duration(seconds: 2),
+                  //     backgroundColor: Colors.blue,
+                  //     content: const Text('em breve modo noturno :)'),
+                  //   ),);
+                  // },
                   //value: widget.settingsItemsToEdit.darkMode,
                   activeColor: Colors.blue,
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   // onChanged: (bool value) {
                   //   setState(() {
                   //     widget.settingsItemsToEdit.darkMode = value;
                   //     setSharedPrefsBool('darkmode', value);
                   //   });
                   // },
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 const Text('modo noturno'),
               ]),
@@ -133,7 +152,7 @@ class _SettingsState extends State<Settings> {
                                 final timeOfDay = await showTimePicker(
                                     context: context,
                                     initialTime:
-                                    widget.settingsItemsToEdit.wakingTime,
+                                        widget.settingsItemsToEdit.wakingTime,
                                     builder: (context, child) {
                                       return MediaQuery(
                                         data: MediaQuery.of(context).copyWith(
@@ -157,12 +176,7 @@ class _SettingsState extends State<Settings> {
                                         vertical: 8, horizontal: 16),
                                     child: Center(
                                         child: Text(
-                                            '${widget.settingsItemsToEdit
-                                                .wakingTime.hour.toString()
-                                                .padLeft(2, '0')}:${widget
-                                                .settingsItemsToEdit.wakingTime
-                                                .minute.toString().padLeft(
-                                                2, '0')}')),
+                                            '${widget.settingsItemsToEdit.wakingTime.hour.toString().padLeft(2, '0')}:${widget.settingsItemsToEdit.wakingTime.minute.toString().padLeft(2, '0')}')),
                                   )),
                             )
                           ],
@@ -178,7 +192,7 @@ class _SettingsState extends State<Settings> {
                                 final timeOfDay = await showTimePicker(
                                     context: context,
                                     initialTime:
-                                    widget.settingsItemsToEdit.sleepingTime,
+                                        widget.settingsItemsToEdit.sleepingTime,
                                     builder: (context, child) {
                                       return MediaQuery(
                                         data: MediaQuery.of(context).copyWith(
@@ -202,12 +216,7 @@ class _SettingsState extends State<Settings> {
                                         vertical: 8, horizontal: 16),
                                     child: Center(
                                         child: Text(
-                                            '${widget.settingsItemsToEdit
-                                                .sleepingTime.hour.toString()
-                                                .padLeft(2, '0')}:${widget
-                                                .settingsItemsToEdit
-                                                .sleepingTime.minute.toString()
-                                                .padLeft(2, '0')}')),
+                                            '${widget.settingsItemsToEdit.sleepingTime.hour.toString().padLeft(2, '0')}:${widget.settingsItemsToEdit.sleepingTime.minute.toString().padLeft(2, '0')}')),
                                   )),
                             )
                           ],
@@ -240,14 +249,13 @@ class _SettingsState extends State<Settings> {
                             ],
                             onChanged: (value) async {
                               final goalAmount =
-                              int.tryParse(goalAmountController.text);
+                                  int.tryParse(goalAmountController.text);
                               if (goalAmount != null) {
                                 await setSharedPrefsInt(
                                     'goalAmount', goalAmount);
                                 if (mounted) {
-                                  context
-                                      .read<GoalAmount>()
-                                      .amount = goalAmount;
+                                  context.read<GoalAmount>().amount =
+                                      goalAmount;
                                 }
                               }
                             },

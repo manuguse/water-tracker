@@ -1,3 +1,4 @@
+import 'package:agua_diaria/functions/alarm.dart';
 import 'package:agua_diaria/functions/database.dart';
 import 'package:agua_diaria/models/drink_item.dart';
 import 'package:agua_diaria/models/goal_amount.dart';
@@ -79,6 +80,11 @@ class _GoalScreenState extends State<GoalScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text('adição rápida'),
+                  TextButton(
+                      onPressed: () async {
+                        await setAlarm(0);
+                      },
+                      child: Text('OI MAMÃE')),
                   const SizedBox(
                     height: 16,
                   ),
@@ -145,6 +151,11 @@ class _GoalScreenState extends State<GoalScreen> {
         ),
       ),
     );
+  }
+
+  static Future<void> printHello(int id) async {
+    print(id);
+    print('tic tac');
   }
 
   Widget getDrinkItems(DrinkItem item) => Padding(

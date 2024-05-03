@@ -1,12 +1,15 @@
+import 'dart:io';
+
 import 'package:agua_diaria/models/goal_amount.dart';
 import 'package:agua_diaria/views/tabs/goal/recommended_amount.dart';
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'views/tab.dart';
 
-void main() {
+void main() async {
   runApp(MaterialApp(
     theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFDCE5F1),
